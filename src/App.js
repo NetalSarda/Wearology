@@ -16,24 +16,29 @@ class App extends React.Component {
       currentUser: null
     };
   }
+
   unsubscribeFromAuth = null;
+
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(user => {
       this.setState({ currentUser: user });
       console.log(user);
     });
   }
+
   componentWillUnmount() {
     this.unsubscribeFromAuth();
   }
+
   render() {
     return (
       <div>
         <Header currentUser={this.state.currentUser} />
         <Routes>
-          <Route exact path='/' component={HomePage} />
-          <Route path='/shop' component={ShopPage} />
-          <Route path='/signin' component={SignInAndSignUpPage} />
+          {/* Use element and pass the component as JSX */}
+          <Route path="/" element={<HomePage />} />
+          <Route path="/shop" element={<ShopPage />} />
+          <Route path="/signin" element={<SignInAndSignUpPage />} />
         </Routes>
       </div>
     );
